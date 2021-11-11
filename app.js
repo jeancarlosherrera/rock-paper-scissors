@@ -87,6 +87,8 @@ const reset = () => {
     playerImage.src = "question.png";
     machineImage.src = "question.png"
     resetButton.textContent = "Reset";
+    playButton.textContent = "Play";
+    banner.textContent = "Choose Your Weapon";
 }
 
 playButton.addEventListener("click", play);
