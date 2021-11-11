@@ -1,10 +1,11 @@
 const playButton = document.getElementById("play");
 const weaponSelector = document.getElementById("weapon");
-let playerImage = document.getElementById("player-img");
-let machineImage = document.getElementById("machine-img");
-let banner = document.querySelector(".banner");
-let playerScoreDisplay = document.getElementById("player-score");
-let machineScoreDisplay = document.getElementById("machine-score");
+const playerImage = document.getElementById("player-img");
+const machineImage = document.getElementById("machine-img");
+const playerScoreDisplay = document.getElementById("player-score");
+const machineScoreDisplay = document.getElementById("machine-score");
+const banner = document.getElementById("banner");
+const resetButton = document.getElementById("reset");
 
 const machineWeapon = () => {
     let rand = Math.floor(Math.random() * 3) + 1;
@@ -21,7 +22,6 @@ const play = () => {
         let result;
         const playerWeapon = weapon.value;
         let machineResult = machineWeapon();
-        machineWeapon();
         if (playerWeapon === machineResult) {
             result = "Draw";
             machineImage.src = playerImage.src;
@@ -51,32 +51,47 @@ const play = () => {
             machineScore += 1;
         }
 
-        const winner = document.createElement("li");
-        banner.appendChild(winner)
-        winner.textContent = result;
         machineScoreDisplay.textContent = machineScore;
-        playerScoreDisplay.textContent = playerScore;
+        playerScoreDisplay.innerText = playerScore;
         playButton.innerText = "Next Round"
+        banner.textContent = result;
 
         if (playerScore === 3) {
             isGameOver = true;
             result = "You Won!"
             weaponSelector.disabled = true;
-            winner.textContent = result;
-            const playAgainButton = document.createElement("button");
-            banner.appendChild(playAgainButton);
+            banner.textContent = result;
+            playButton.disabled = true;
+            resetButton.textContent = "Play Again";
+
         } else if (machineScore === 3) {
             isGameOver = true;
             result = "Machine Won!"
             weaponSelector.disabled = true;
-            winner.textContent = result;
-            const playAgainButton = document.createElement("button");
-            banner.appendChild(playAgainButton);
+            banner.textContent = result;
+            playButton.disabled = true;
+            resetButton.textContent = "Play Again";
         }
     }
 }
 
-playButton.addEventListener("click", play)
+const reset = () => {
+    playerScore = 0;
+    machineScore = 0;
+    isGameOver = false;
+    playButton.disabled = false;
+    weaponSelector.disabled = false;
+    weaponSelector.selectedIndex = 0;
+    playerScoreDisplay.textContent = playerScore;
+    machineScoreDisplay.textContent = machineScore;
+    playerImage.src = "question.png";
+    machineImage.src = "question.png"
+    resetButton.textContent = "Reset";
+}
+
+playButton.addEventListener("click", play);
+
+resetButton.addEventListener("click", reset);
 
 weaponSelector.addEventListener("change", () => {
     weaponSelector.value === "Rock" ? playerImage.src = "rock.png" : weaponSelector.value === "Paper" ? playerImage.src = "paper.png"
