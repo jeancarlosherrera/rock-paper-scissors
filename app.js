@@ -58,7 +58,7 @@ const play = () => {
 
         if (playerScore === 3) {
             isGameOver = true;
-            result = "You Won!"
+            result = "You Won!!"
             weaponSelector.disabled = true;
             banner.textContent = result;
             playButton.disabled = true;
@@ -66,7 +66,7 @@ const play = () => {
 
         } else if (machineScore === 3) {
             isGameOver = true;
-            result = "Machine Won!"
+            result = "Machine Won!!"
             weaponSelector.disabled = true;
             banner.textContent = result;
             playButton.disabled = true;
